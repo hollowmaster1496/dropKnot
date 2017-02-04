@@ -26,17 +26,15 @@ void monitor_eyes(IplImage *newframe,
 
 	/*counts total squints per frame*/
 	int squint_count = eyes->total;
-	std::cout << "total: " << squint_count;
+	std::cout << "total: " << squint_count << std::endl;
 
 	/* Draw rectangle over each squint */
 	for (int i = 0; i < squint_count; i++)
 	{
 		CvRect *r = (CvRect *)cvGetSeqElem(eyes, i);
 
-		cvRectangle(newframe,
-			cvPoint(r->x, r->y),
-			cvPoint(r->x + r->width, r->y + r->height),
-			CV_RGB(0, 255, 0), 2, 8, 0);
+		cvCircle(newframe, CvPoint((r->x) + r->width/1.8, (r->y) + r->height/1.8),
+									r->x/10, CV_RGB(250, 250, 250), 0.5, 8, 0);
 	}
 
 	/* find redness of eye */

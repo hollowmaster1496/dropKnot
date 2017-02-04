@@ -11,18 +11,12 @@ EyeTracker::~EyeTracker() {
 	//just in case anything needs to be deallocated
 }
 
-/* This method monitors user's eyes over 50 frames
-*
-*
-*/
+
 int EyeTracker::detect_fatigue_level(cv::Mat frame) {
 	return 0;
 }
 
-/* This method calculates a running average of 
-*	subject's squint/blinks.
-*
-*/
+
 double EyeTracker::find_shut_duration(int item) {
 	if (eyes_state_cache.size() == 50)
 	{

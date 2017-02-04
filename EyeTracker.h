@@ -22,7 +22,7 @@ public:
 	~EyeTracker();
 
 
-	/* This method monitors user's eyes over 50 a frame interval
+	/* This method monitors user's eyes over a 50 frame interval
 	 *  and continuosly updates the _average_open_state member */
 	//void monitor_eyes(IplImage*, CvHaarClassifierCascade *cascade, CvMemStorage *storage);
 
