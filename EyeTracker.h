@@ -30,7 +30,7 @@ public:
 
 	/* This method calculates how long during a 50 frame period the
 	 *  the subject's eyes remained shut */
-	int find_shut_duration();
+	double find_shut_duration(int item);
 
 private:
 	std::queue<int> eyes_state_cache;	// stores eyes open state for past frames
