@@ -1,3 +1,5 @@
+/* Author: Haseeb Syed */
+
 #include "EyeTracker.h"
 
 EyeTracker::EyeTracker(int cache_size) {

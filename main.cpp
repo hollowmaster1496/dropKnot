@@ -10,7 +10,7 @@ using namespace cv;
 
 CvHaarClassifierCascade *cascade;
 CvMemStorage *storage;
-
+EyeTracker tracker(50);
 
 /* This method monitors user's eyes over a 50 frame interval
 *
@@ -18,8 +18,7 @@ CvMemStorage *storage;
 */
 void monitor_eyes(IplImage *newframe,
 				CvHaarClassifierCascade *cascade,
-				CvMemStorage *storage, 
-				std::queue<int> *frame_queue) {
+				CvMemStorage *storage) {
 
 	CvSeq *eyes = cvHaarDetectObjects(newframe, cascade, storage,
 									  1.10, 5, 0, //CV_HAAR_DO_CANNY_PRUNING 
@@ -38,8 +37,17 @@ void monitor_eyes(IplImage *newframe,
 			cvPoint(r->x, r->y),
 			cvPoint(r->x + r->width, r->y + r->height),
 			CV_RGB(0, 255, 0), 2, 8, 0);
+	}
 
-
+	/* find redness of eye */
+	if (squint_count == 0)
+	{
+		tracker.find_shut_duration(tracker.EYES_OPEN);
+		//place redness detecting code here
+	}
+	else
+	{
+		tracker.find_shut_duration(tracker.EYES_CLOSED);
 	}
 }
 

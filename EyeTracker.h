@@ -1,3 +1,5 @@
+/*Author: Haseeb Syed */
+
 #include <queue>
 #include <opencv2/opencv.hpp>
 
@@ -7,7 +9,7 @@
 class EyeTracker
 {
 public:
-	enum
+	enum state
 	{
 		EYES_OPEN,
 		EYES_CLOSED
