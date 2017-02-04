@@ -22,11 +22,11 @@ public:
 
 	/* This method monitors user's eyes over 50 a frame interval
 	 *  and continuosly updates the _average_open_state member */
-	void monitor_eyes();
+	//void monitor_eyes(IplImage*, CvHaarClassifierCascade *cascade, CvMemStorage *storage);
 
 	/* This method calculates the redness of the eyes and returns
 	 *	an integer from a "tiredness" scale of 1 to 10  */
-	int detect_fatigue_level();
+	int detect_fatigue_level(cv::Mat frame);
 
 	/* This method calculates how long during a 50 frame period the
 	 *  the subject's eyes remained shut */
