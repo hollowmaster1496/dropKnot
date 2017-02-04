@@ -4,12 +4,6 @@
 
 EyeTracker::EyeTracker(int cache_size) {
 	_cache_size = cache_size;
-
-	for (int i = 0; i < cache_size; i++)
-	{
-		eyes_state_cache[i] = 1;	//assume eyes open for first 50 frames
-	}
-
 	_average_open_state = 1;		
 }
 
@@ -30,7 +24,7 @@ int EyeTracker::detect_fatigue_level(cv::Mat frame) {
 *
 */
 double EyeTracker::find_shut_duration(int item) {
-	if (eyes_state_cache.size == 50)
+	if (eyes_state_cache.size() == 50)
 	{
 		int tmp = eyes_state_cache.front();
 		eyes_state_cache.pop();
@@ -39,7 +33,5 @@ double EyeTracker::find_shut_duration(int item) {
 	eyes_state_cache.push(item);
 	_average_open_state += item;
 
-	return (double)_average_open_state / (eyes_state_cache.size);
-	return 
-	
+	return (double)_average_open_state / (eyes_state_cache.size());
 }
