@@ -1,9 +1,10 @@
 /*Author: Haseeb Syed */
 
 #include "opencv2/opencv.hpp"
+#include <queue>
 #include <stdio.h>
 #include "EyeTracker.h"
-//#include <iostream>
+#include <iostream>
 
 using namespace cv;
 
@@ -16,17 +17,20 @@ CvMemStorage *storage;
 *
 */
 void monitor_eyes(IplImage *newframe,
-	CvHaarClassifierCascade *cascade,
-	CvMemStorage *storage) {
+				CvHaarClassifierCascade *cascade,
+				CvMemStorage *storage, 
+				std::queue<int> *frame_queue) {
 
 	CvSeq *eyes = cvHaarDetectObjects(newframe, cascade, storage,
-		1.15, 5,
-		0, //CV_HAAR_DO_CANNY_PRUNING 
-		cvSize(30, 30));
-	// Looking for better detection?! Try these parameters: 
-	// 1.15, 5, 0, cvSize(30 x 30)
+									  1.10, 5, 0, //CV_HAAR_DO_CANNY_PRUNING 
+									  cvSize(25, 25));
 
-	for (int i = 0; i < (eyes ? eyes->total : 0); i++)
+	/*counts total squints per frame*/
+	int squint_count = eyes->total;
+	std::cout << "total: " << squint_count;
+
+	/* Draw rectangle over each squint */
+	for (int i = 0; i < squint_count; i++)
 	{
 		CvRect *r = (CvRect *)cvGetSeqElem(eyes, i);
 
@@ -34,6 +38,8 @@ void monitor_eyes(IplImage *newframe,
 			cvPoint(r->x, r->y),
 			cvPoint(r->x + r->width, r->y + r->height),
 			CV_RGB(0, 255, 0), 2, 8, 0);
+
+
 	}
 }
 

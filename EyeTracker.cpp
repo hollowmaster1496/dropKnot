@@ -2,7 +2,6 @@
 
 EyeTracker::EyeTracker(int cache_size) {
 	_cache_size = cache_size;
-	EyeTracker::eyes_state_cache = std::vector<int>(cache_size);
 
 	for (int i = 0; i < cache_size; i++)
 	{

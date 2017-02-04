@@ -1,4 +1,4 @@
-#include <vector>
+#include <queue>
 #include <opencv2/opencv.hpp>
 
 #ifndef EYE_TRACKER_H
@@ -33,7 +33,7 @@ public:
 	int find_shut_duration();
 
 private:
-	std::vector<int> eyes_state_cache;	// stores eyes open state for past frames
+	std::queue<int> eyes_state_cache;	// stores eyes open state for past frames
 	int _average_open_state;			// average number of times eyes remain open in eyes_state_cache[]
 	int _cache_size = 50;				// total number of frames stored in cache at a time
 };
