@@ -20,8 +20,26 @@ EyeTracker::~EyeTracker() {
 *
 *
 */
-void monitorEyes() {
+void monitor_eyes(IplImage *newframe, 
+				  CvHaarClassifierCascade *cascade,
+				  CvMemStorage *storage) {
 
+	CvSeq *eyes = cvHaarDetectObjects(newframe, cascade, storage,
+		1.15, 5,
+		0, //CV_HAAR_DO_CANNY_PRUNING 
+		cvSize(30, 30));
+	// Looking for better detection?! Try these parameters: 
+	// 1.15, 5, 0, cvSize(30 x 30)
+
+	for (int i = 0; i < (eyes ? eyes->total : 0); i++)
+	{
+		CvRect *r = (CvRect *)cvGetSeqElem(eyes, i);
+
+		cvRectangle(newframe,
+			cvPoint(r->x, r->y),
+			cvPoint(r->x + r->width, r->y + r->height),
+			CV_RGB(0, 255, 0), 2, 8, 0);
+	}
 }
 
 /* This method monitors user's eyes over 50 frames
