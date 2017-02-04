@@ -17,8 +17,8 @@ int EyeTracker::detect_fatigue_level(cv::Mat frame) {
 }
 
 
-double EyeTracker::find_shut_duration(int item) {
-	if (eyes_state_cache.size() == 50)
+void EyeTracker::find_shut_duration(int item) {
+	if (eyes_state_cache.size() == 5000)
 	{
 		int tmp = eyes_state_cache.front();
 		eyes_state_cache.pop();
@@ -27,5 +27,7 @@ double EyeTracker::find_shut_duration(int item) {
 	eyes_state_cache.push(item);
 	_average_open_state += item;
 
-	return (double)_average_open_state / (eyes_state_cache.size());
+	sleep_deprivation_degree = (double)_average_open_state / (eyes_state_cache.size());
 }
+
+

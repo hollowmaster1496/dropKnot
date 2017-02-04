@@ -10,7 +10,7 @@ using namespace cv;
 
 CvHaarClassifierCascade *cascade;
 CvMemStorage *storage;
-EyeTracker tracker(50);
+EyeTracker tracker(5000);
 
 /* This method monitors user's eyes over a 50 frame interval
 *
@@ -37,6 +37,7 @@ void monitor_eyes(IplImage *newframe,
 									r->x/10, CV_RGB(250, 250, 250), 0.5, 8, 0);
 	}
 
+	
 	/* find redness of eye */
 	if (squint_count == 0)
 	{
@@ -85,13 +86,17 @@ int main(int, char**)
 	namedWindow("edges", 1);
 	for (;;)
 	{
+		if (tracker.sleep_deprivation_degree >= 1)
+			std::cout << "sleep deprivation degree: " << tracker.sleep_deprivation_degree;
+			//break;
+
 		Mat frame;
 		capture >> frame; // get a new frame from camera
 		//cvtColor(frame, edges1, COLOR_RGB2GRAY);
 		edges1 = frame;
 
 		//GaussianBlur(edges, edges, Size(7, 7), 1.5, 1.5);
-		//Canny(edges, edges, 0, 30, 3);
+		//Canny(edges1, edges1, 0, 30, 3);
 		monitor_eyes(edges, cascade, storage);
 		cvShowImage("edges", edges);
 		//cvReleaseImage( )
