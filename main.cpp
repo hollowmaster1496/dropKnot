@@ -30,28 +30,6 @@ int main(int, char**)
 	return 0;
 }
 
-/* This method monitors user's eyes over 50 a frame interval
- * 
- *
- */
-void monitorEyes() {
 
-}
-
-/* This method monitors user's eyes over 50 frames
-*
-*
-*/
-int findEyeFatigue(Mat frame) {
-
-}
-
-/* This method monitors user's eyes over 50 frames
-*
-*
-*/
-int findEyeShutDuration() {
-
-}
 
 
