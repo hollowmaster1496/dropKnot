@@ -55,6 +55,9 @@ void monitor_eyes(IplImage *newframe,
  */
 int main(int, char**)
 {
+
+	cvStartWindowThread();
+
 	// load "closed eyes" classifier as cascade
 	std::string RootCascade = "Cascade/";
 	std::string Extension = ".xml";
@@ -86,9 +89,12 @@ int main(int, char**)
 	namedWindow("edges", 1);
 	for (;;)
 	{
-		if (tracker.sleep_deprivation_degree >= 1)
+		if (tracker.sleep_deprivation_degree >= 0.65)
+		{
 			std::cout << "sleep deprivation degree: " << tracker.sleep_deprivation_degree;
-			//break;
+			break;
+		}
+
 
 		Mat frame;
 		capture >> frame; // get a new frame from camera
@@ -107,6 +113,8 @@ int main(int, char**)
 	// Cleanup
 	cvReleaseHaarClassifierCascade(&cascade);
 	cvReleaseMemStorage(&storage);
+
+	destroyWindow("edges");
 
 	// the camera will be deinitialized automatically in VideoCapture destructor
 	return 0;
