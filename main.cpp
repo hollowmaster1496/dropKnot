@@ -24,9 +24,9 @@ void monitor_eyes(IplImage *newframe,
 									  1.10, 5, 0, //CV_HAAR_DO_CANNY_PRUNING 
 									  cvSize(25, 25));
 
-	/*counts total squints per frame*/
+	/* Counts total squints per frame */
 	int squint_count = eyes->total;
-	std::cout << "total: " << squint_count << std::endl;
+	//std::cout << "total: " << squint_count << std::endl;
 
 	/* Draw rectangle over each squint */
 	for (int i = 0; i < squint_count; i++)
@@ -111,7 +111,3 @@ int main(int, char**)
 	// the camera will be deinitialized automatically in VideoCapture destructor
 	return 0;
 }
-
-
-
-
